@@ -52,7 +52,7 @@ module.exports = {
   <head>
     <meta charset="utf-8">
     <title>Webpack App</title>
-    <link rel="icon" href="webpack.ico">
+    <link rel="icon" href="/webpack-react/webpack.ico">
   </head>
   <body>
     <div id="app"></div>
