@@ -1,10 +1,7 @@
 import { Child } from "./Child";
-import ConversationIcon from "../../public/assets/images/conversation.svg";
+import ConversationIcon from "../assets/images/conversation.svg";
 const App: React.FC = () => {
-  const catUrl = new URL(
-    "../../public/assets/images/image.png",
-    import.meta.url,
-  ).href;
+  const catUrl = new URL("../assets/images/image.png", import.meta.url).href;
   return (
     <div>
       <Child name="dou" />

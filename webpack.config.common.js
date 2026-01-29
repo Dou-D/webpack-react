@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -29,7 +30,7 @@ module.exports = {
         type: "asset",
         parser: {
           dataUrlCondition: {
-            maxSize: 8192,
+            maxSize: 1024 * 1024 * 2, // 2MB
           },
         },
       },
@@ -51,12 +52,22 @@ module.exports = {
   <head>
     <meta charset="utf-8">
     <title>Webpack App</title>
+    <link rel="icon" type="image/svg+xml" href="/webpack.ico" />
   </head>
   <body>
     <div id="app"></div>
   </body>
 </html>
     `,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "public",
+          to: ".",
+          toType: "dir",
+        },
+      ],
     }),
   ],
 };
