@@ -4,7 +4,7 @@ const App: React.FC = () => {
     <div>
       <Child name="dou" />
       <img src="assets/images/image.png" alt="小猫" />
-      <img src="/assets/images/conversation.svg" alt="Conversation Icon" />
+      <img src="assets/images/conversation.svg" alt="Conversation Icon" />
     </div>
   );
 };
