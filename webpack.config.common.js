@@ -1,22 +1,7 @@
-const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    clean: true,
-    publicPath: "/webpack-react/",
-  },
-  devtool: "inline-source-map",
-  devServer: {
-    hot: true,
-    // static: {
-    //   directory: path.resolve(__dirname, "public"),
-    //   publicPath: "/",
-    // },
-  },
   module: {
     rules: [
       {
@@ -44,7 +29,7 @@ module.exports = {
         type: "asset",
         parser: {
           dataUrlCondition: {
-            maxSize: 1024 * 1024 * 4,
+            maxSize: 8192,
           },
         },
       },
@@ -73,14 +58,5 @@ module.exports = {
 </html>
     `,
     }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: "public",
-    //       to: ".",
-    //       toType: "dir",
-    //     },
-    //   ],
-    // }),
   ],
 };
