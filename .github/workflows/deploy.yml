@@ -1,0 +1,61 @@
+name: Deploy Static React Site
+# 1. 触发条件：当代码被推送到 main 分支时触发
+on:
+  push:
+    branches: ["master"]
+  # 允许你在 GitHub 界面手动点击按钮触发
+  workflow_dispatch:
+
+# 设置权限，允许 GITHUB_TOKEN 读取代码和写入 Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 2. 并发控制：防止多次快速 push 导致部署冲突
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # 定义一个名为 deploy 的任务
+  deploy:
+    # 指定运行环境：最新版的 Ubuntu
+    runs-on: ubuntu-latest
+    # 这里的 environment 对应 GitHub Pages 的环境设置
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # 第一步：把代码拉取到虚拟环境里
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 第二步：安装 pnpm 和 Node.js
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # 建议使用 LTS 版本
+          cache: "pnpm" # 自动缓存依赖，加快下次构建速度
+
+      # 第三步：安装依赖
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 第四步：构建项目(使用webpack打包)
+      - name: Build
+        run: pnpm build
+
+      # 第五步：上传构建产物 (告诉 GitHub 哪个文件夹是网站内容)
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist"
+
+      # 第六步：部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

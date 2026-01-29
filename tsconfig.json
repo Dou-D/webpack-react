@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "target": "ES2018",
+    "lib": ["DOM", "DOM.Iterable", "ES2018"],
+    "jsx": "react-jsx"
+  },
+  "include": ["src/**/*", "types/**/*"]
+}
