@@ -2,9 +2,10 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "moduleResolution": "node",
-    "target": "ES2018",
+    "target": "esnext",
     "lib": ["DOM", "DOM.Iterable", "ES2018"],
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "module": "esnext"
   },
   "include": ["src/**/*", "types/**/*"]
 }
