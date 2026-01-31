@@ -30,5 +30,14 @@ const routes: RouteObject[] = [
   },
 ];
 
+type Window = typeof globalThis & {
+  GLOBAL_CONFIG: {
+    BASENAME: string;
+  };
+};
+
+const basename = (window as unknown as Window).GLOBAL_CONFIG?.BASENAME || "/";
 // 3. 创建路由实例
-export const router = createHashRouter(routes);
+export const router = createHashRouter(routes, {
+  basename,
+});
