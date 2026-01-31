@@ -38,6 +38,6 @@ type Window = typeof globalThis & {
 
 const basename = (window as unknown as Window).GLOBAL_CONFIG?.BASENAME || "/";
 // 3. 创建路由实例
-export const router = createHashRouter(routes, {
+export const router = createBrowserRouter(routes, {
   basename,
 });
