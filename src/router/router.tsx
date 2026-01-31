@@ -1,5 +1,9 @@
 import { lazy } from "react";
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createHashRouter,
+  RouteObject,
+} from "react-router-dom";
 import BasicLayout from "../layouts/BasicLayout";
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -27,5 +31,4 @@ const routes: RouteObject[] = [
 ];
 
 // 3. 创建路由实例
-// 这里使用 HashRouter 是为了配合你之前的 "auto" 路径配置，确保任意部署环境都能跑
-export const router = createBrowserRouter(routes);
+export const router = createHashRouter(routes);
