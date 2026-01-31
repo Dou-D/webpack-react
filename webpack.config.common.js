@@ -1,8 +1,12 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
+  output: {
+    clean: true,
+    publicPath: "auto",
+  },
   module: {
     rules: [
       {
@@ -10,7 +14,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
+            loader: "babel-loader", 
             options: {
               presets: [
                 ["@babel/preset-env"],
@@ -45,21 +49,6 @@ module.exports = {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      templateContent: `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Webpack App</title>
-    <link rel="icon" href="/webpack-react/webpack.ico">
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
-</html>
-    `,
-    }),
     new CopyPlugin({
       patterns: [
         {
@@ -68,6 +57,21 @@ module.exports = {
           toType: "dir",
         },
       ],
+    }),
+    new HtmlWebpackPlugin({
+      templateContent: `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Webpack App</title>
+    <link rel="icon" href="webpack.ico">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+    `,
     }),
   ],
 };
