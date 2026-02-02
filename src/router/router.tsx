@@ -1,9 +1,5 @@
 import { lazy } from "react";
-import {
-  createBrowserRouter,
-  createHashRouter,
-  RouteObject,
-} from "react-router-dom";
+import { createHashRouter, RouteObject } from "react-router-dom";
 import BasicLayout from "../layouts/BasicLayout";
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -36,8 +32,5 @@ type Window = typeof globalThis & {
   };
 };
 
-const basename = (window as unknown as Window).GLOBAL_CONFIG?.BASENAME || "/";
-// 3. 创建路由实例
-export const router = createBrowserRouter(routes, {
-  basename,
-});
+
+export const router = createHashRouter(routes);
