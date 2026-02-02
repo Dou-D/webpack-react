@@ -30,12 +30,23 @@ module.exports = {
       },
       {
         test: /\.(png|jpg)$/,
-        type: "asset",
-        parser: {
-          dataUrlCondition: {
-            maxSize: 1024 * 1024 * 1, // 2MB
+        oneOf: [
+          {
+            type: "javascript/auto",
+            resourceQuery: /sizes?/,
+            use: [
+              {
+                loader: "responsive-loader",
+                options: {
+                  adapter: require("responsive-loader/sharp"),
+                },
+              },
+            ],
           },
-        },
+          {
+            type: "asset/resource",
+          },
+        ],
       },
       {
         test: /\.svg$/i,
